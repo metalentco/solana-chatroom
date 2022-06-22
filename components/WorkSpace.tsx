@@ -13,6 +13,8 @@ import useCollection from "@/hooks/useCollection";
 import { ICollection } from "@/interfaces/Collection";
 import { StreamChat } from "stream-chat";
 import { GETSTREAM_API_KEY, GETSTREAM_API_SECRECT_KEY } from "@/libs/constants";
+import Web3 from "web3";
+import { checkHoldNFT } from "@/libs/utils";
 
 type WorkSpaceProps = {
   isRegisteringCollection: boolean;
@@ -68,6 +70,7 @@ const WorkSpace = ({
 
     setIsWorking(true);
 
+    // Validation
     const duplicated = await isDuplicatedUserId(userId);
     if (duplicated) {
       toast.error("User ID is already used.");
@@ -83,6 +86,7 @@ const WorkSpace = ({
       avatar = "/images/avatar.png";
     }
 
+    // Call server side API to create user token
     const response = await fetch("/api/createtoken", {
       method: "POST",
       headers: {
@@ -135,6 +139,7 @@ const WorkSpace = ({
 
     setIsWorking(true);
 
+    // Validation
     const duplicated = await isDuplicatedName(collectionName);
     if (duplicated) {
       toast.error("Collection Name is already used.");
@@ -151,6 +156,18 @@ const WorkSpace = ({
       avatar = "/images/avatar.png";
     }
 
+    if (!Web3.utils.isAddress(contractAddress)) {
+      toast.error("Please type contract address correctly.");
+      return;
+    }
+
+    const holdNFT = await checkHoldNFT(account, contractAddress);
+    if (!holdNFT) {
+      toast.error("You need to have at least one NFT.");
+      return;
+    }
+
+    // Call server side API to create channel
     const response = await fetch("/api/createchannel", {
       method: "POST",
       headers: {
