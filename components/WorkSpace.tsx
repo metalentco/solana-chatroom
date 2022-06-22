@@ -107,9 +107,13 @@ const WorkSpace = ({
 
       toast.success("Your profile is successfully created.");
     } else {
-      const data = await response.json();
-      const error = data?.error;
-      toast.error(error);
+      if (response.status == 400) {
+        const data = await response.json();
+        const error = data?.error;
+        toast.error(error);
+      } else {
+        toast.error("Error occured on creating token in server side.");
+      }
     }
     setIsWorking(false);
     setIsShownProfileModal(false);
@@ -172,9 +176,13 @@ const WorkSpace = ({
 
       toast.success("Your collection is successfully registered.");
     } else {
-      const data = await response.json();
-      const error = data?.error;
-      toast.error(error);
+      if (response.status == 400) {
+        const data = await response.json();
+        const error = data?.error;
+        toast.error(error);
+      } else {
+        toast.error("Error occured on creating channel in server side.");
+      }
     }
     setIsWorking(false);
     setIsRegisteringCollection(false);
@@ -201,9 +209,13 @@ const WorkSpace = ({
     });
 
     if (!response.ok) {
-      const data = await response.json();
-      const error = data?.error;
-      toast.error(error);
+      if (response.status == 400) {
+        const data = await response.json();
+        const error = data?.error;
+        toast.error(error);
+      } else {
+        toast.error("Error occured on updating membership in server side.");
+      }
     }
   };
 

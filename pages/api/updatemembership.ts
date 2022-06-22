@@ -36,15 +36,15 @@ export default async function handler(
         GETSTREAM_API_SECRECT_KEY
       );
 
-      collections.forEach(async (collection: ICollection) => {
+      for (let collection of collections) {
         const channel = serverClient.channel("messaging", collection.id);
         const holdNft = await checkHoldNFT(address, collection.contract);
         if (holdNft) {
-          channel.addMembers([userId]);
+          await channel.addMembers([userId]);
         } else {
-          channel.removeMembers([userId]);
+          await channel.removeMembers([userId]);
         }
-      });
+      }
       return res.status(200).json({ message: "Success" });
     } else {
       return res.status(400).json({ error: "Parameters are incorrect." });
