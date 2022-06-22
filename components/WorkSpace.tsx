@@ -158,12 +158,14 @@ const WorkSpace = ({
 
     if (!Web3.utils.isAddress(contractAddress)) {
       toast.error("Please type contract address correctly.");
+      setIsWorking(false);
       return;
     }
 
     const holdNFT = await checkHoldNFT(account, contractAddress);
     if (!holdNFT) {
       toast.error("You need to have at least one NFT.");
+      setIsWorking(false);
       return;
     }
 
