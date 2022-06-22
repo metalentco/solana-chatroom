@@ -19,7 +19,7 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   if (req.method != "POST") {
-    res.status(400).json({ error: "It should be POST method." });
+    return res.status(400).json({ error: "It should be POST method." });
   }
 
   try {
@@ -46,8 +46,9 @@ export default async function handler(
         }
       });
       return res.status(200).json({ message: "Success" });
+    } else {
+      return res.status(400).json({ error: "Parameters are incorrect." });
     }
-    res.status(400).json({ error: "Eror occured on updating membership." });
   } catch (e: any) {
     console.log(e);
     res.status(400).json({ error: e?.message });

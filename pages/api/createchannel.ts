@@ -12,12 +12,12 @@ type Data = {
   error?: string;
 };
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
   if (req.method != "POST") {
-    res.status(400).json({ error: "It should be POST method." });
+    return res.status(400).json({ error: "It should be POST method." });
   }
 
   try {
@@ -44,10 +44,11 @@ export default function handler(
         created_by_id: GETSTREAM_OWNER_ID,
       });
 
-      channel.create();
+      await channel.create();
       return res.status(200).json({ message: "Success" });
+    } else {
+      return res.status(400).json({ error: "Parameters are incorrect." });
     }
-    res.status(400).json({ error: "Eror occured on creating channel." });
   } catch (e: any) {
     console.log(e);
     res.status(400).json({ error: e?.message });
