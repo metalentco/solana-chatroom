@@ -65,5 +65,18 @@ export default function useCollection() {
     return docs.length > 0;
   };
 
-  return { getCollectionData, saveCollectionData, getAllCollections, isDuplicatedName };
+  const isDuplicatedContract = async (contract: string) => {
+    if (!firebase) return true;
+
+    const collection = await getCollectionData(contract);
+    return collection != null;
+  };
+
+  return {
+    getCollectionData,
+    saveCollectionData,
+    getAllCollections,
+    isDuplicatedName,
+    isDuplicatedContract,
+  };
 }

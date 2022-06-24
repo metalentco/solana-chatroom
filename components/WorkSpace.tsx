@@ -28,8 +28,12 @@ const WorkSpace = ({
   const { active, account, library } = useWeb3React();
   const { getUserData, saveUserData, uploadAvatar, isDuplicatedUserId } =
     useUser();
-  const { saveCollectionData, getAllCollections, isDuplicatedName } =
-    useCollection();
+  const {
+    saveCollectionData,
+    getAllCollections,
+    isDuplicatedName,
+    isDuplicatedContract,
+  } = useCollection();
   const [user, setUser] = useState<IUser>({
     id: "",
     userId: "",
@@ -140,8 +144,15 @@ const WorkSpace = ({
     setIsWorking(true);
 
     // Validation
-    const duplicated = await isDuplicatedName(collectionName);
-    if (duplicated) {
+    const duplicatedContract = await isDuplicatedContract(contractAddress);
+    if (duplicatedContract) {
+      toast.error("Contract is already taken.");
+      setIsWorking(false);
+      return;
+    }
+
+    const duplicatedName = await isDuplicatedName(collectionName);
+    if (duplicatedName) {
       toast.error("Collection Name is already used.");
       setIsWorking(false);
       return;
@@ -358,7 +369,7 @@ const WorkSpace = ({
               width: "100%",
               textAlign: "center",
             }}
-            onChange={(e) => setContractAddress(e.target.value)}
+            onChange={(e) => setContractAddress(e.target.value?.toLowerCase())}
           />
           <br />
           <Input
