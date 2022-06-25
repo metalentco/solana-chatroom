@@ -47,7 +47,7 @@ const ActivityRoom = ({ userToken, userId }: ActivityRoomProps) => {
             flexDirection: "row",
           }}
         >
-          <h3>Op3n D3mo</h3>
+          <h3>Next Chat</h3>
           <NotificationDropdown
             // @ts-ignore
             arrow

@@ -9,7 +9,7 @@ const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Op3n D3mo</title>
+        <title>Next Chat</title>
         <meta name="description" content="Open Demo App" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
