@@ -2,9 +2,10 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "@/styles/Home.module.scss";
 import Header, { PAGE_TYPES } from "@/components/Header";
-import Link from "next/link";
+import { useState } from "react";
+import ActivitySpace from "@/components/ActivitySpace";
 
-const Home: NextPage = () => {
+const ActivityFeeds: NextPage = () => {
 
   return (
     <div className={styles.container}>
@@ -17,20 +18,12 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <Header
           onRegisterCollection={null}
-          pageType={PAGE_TYPES.HOME}
+          pageType={PAGE_TYPES.ACTIVITYFEEDS}
         />
-
-        <div className={styles.linkWrapper}>
-          <Link href="/chatmessaging">
-            <button className={styles.buttonLink}>Chat Messaging</button>
-          </Link>
-          <Link href="/activityfeeds">
-            <button className={styles.buttonLink}>Activity Feeds</button>
-          </Link>
-        </div>
+        <ActivitySpace />
       </main>
     </div>
   );
 };
 
-export default Home;
+export default ActivityFeeds;

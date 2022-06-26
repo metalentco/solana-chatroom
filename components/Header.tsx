@@ -13,11 +13,18 @@ import { truncateAddress } from "@/libs/utils";
 import styles from "@/styles/Header.module.scss";
 import { StreamChat } from "stream-chat";
 
+export enum PAGE_TYPES {
+  HOME = "HOME",
+  ACTIVITYFEEDS = "ACTIVITY_FEEDS",
+  CHATMESSAGING = "CHAT_MESSAGING",
+}
+
 type HeaderProps = {
   onRegisterCollection: any;
+  pageType: PAGE_TYPES;
 };
 
-const Header = ({ onRegisterCollection }: HeaderProps) => {
+const Header = ({ onRegisterCollection, pageType }: HeaderProps) => {
   const { active, account, chainId, library, activate, deactivate } =
     useWeb3React();
   const [isOpenConnectModal, setIsOpenConnectModal] = useState<boolean>(false);
@@ -89,12 +96,15 @@ const Header = ({ onRegisterCollection }: HeaderProps) => {
               &nbsp;)
             </p>
           </div>
-          <button
-            onClick={onRegisterCollection}
-            className={styles.buttonConnect}
-          >
-            Register Collection
-          </button>
+          {pageType == PAGE_TYPES.CHATMESSAGING && (
+            <button
+              onClick={onRegisterCollection}
+              className={styles.buttonConnect}
+            >
+              Register Collection
+            </button>
+          )}
+
           <button onClick={disconnect} className={styles.buttonConnect}>
             Disconnect
           </button>

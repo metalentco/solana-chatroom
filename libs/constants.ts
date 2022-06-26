@@ -39,6 +39,8 @@ export const NETWORK_TYPES = [
   "Rinkeby Test Network",
 ];
 
+export const GETSTREAM_APP_ID = process.env.NEXT_PUBLIC_GETSTREAM_APP_ID!;
 export const GETSTREAM_API_KEY = process.env.NEXT_PUBLIC_GETSTREAM_API_KEY!;
-export const GETSTREAM_API_SECRECT_KEY = process.env.NEXT_PUBLIC_GETSTREAM_API_SECRECT_KEY!;
+export const GETSTREAM_API_SECRECT_KEY =
+  process.env.NEXT_PUBLIC_GETSTREAM_API_SECRECT_KEY!;
 export const GETSTREAM_OWNER_ID = process.env.NEXT_PUBLIC_GETSTREAM_OWNER_ID!;

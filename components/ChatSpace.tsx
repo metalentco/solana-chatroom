@@ -11,20 +11,18 @@ import Button from "@mui/material/Button";
 import { toast } from "react-toastify";
 import useCollection from "@/hooks/useCollection";
 import { ICollection } from "@/interfaces/Collection";
-import { StreamChat } from "stream-chat";
-import { GETSTREAM_API_KEY, GETSTREAM_API_SECRECT_KEY } from "@/libs/constants";
 import Web3 from "web3";
 import { checkHoldNFT } from "@/libs/utils";
 
-type WorkSpaceProps = {
+type ChatSpaceProps = {
   isRegisteringCollection: boolean;
   setIsRegisteringCollection: any;
 };
 
-const WorkSpace = ({
+const ChatSpace = ({
   isRegisteringCollection,
   setIsRegisteringCollection,
-}: WorkSpaceProps) => {
+}: ChatSpaceProps) => {
   const { active, account, library } = useWeb3React();
   const { getUserData, saveUserData, uploadAvatar, isDuplicatedUserId } =
     useUser();
@@ -400,4 +398,4 @@ const WorkSpace = ({
   );
 };
 
-export default WorkSpace;
+export default ChatSpace;
