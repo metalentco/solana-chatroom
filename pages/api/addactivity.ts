@@ -36,21 +36,17 @@ const getUserData = async (uid: string) => {
   return null;
 };
 
-async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<Data>
+) {
   if (req.method != "POST") {
     return res.status(400).json({ error: "It should be POST method." });
   }
 
   try {
-    const {
-      topic,
-      title,
-      description,
-      url,
-      images,
-      contractAddress,
-      walletAddress,
-    } = req.body;
+    const { topic, title, description, url, images, contractAddress, walletAddress } =
+      req.body;
 
     let userId = GETSTREAM_OWNER_ID;
     if (walletAddress) {
@@ -90,7 +86,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
         },
       });
 
-      res.setHeader("Access-Control-Allow-Origin", "*");
       return res.status(200).json({ message: "Success" });
     } else {
       return res.status(400).json({ error: "Parameters are incorrect." });
@@ -100,24 +95,3 @@ async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
     res.status(400).json({ error: e?.message });
   }
 }
-
-const allowCors = (fn: any) => async (req: any, res: any) => {
-  res.setHeader("Access-Control-Allow-Credentials", false);
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Origin", req.headers.origin);
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET,OPTIONS,PATCH,DELETE,POST,PUT"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
-  );
-  if (req.method === "OPTIONS") {
-    res.status(200).end();
-    return;
-  }
-  return await fn(req, res);
-};
-
-export default allowCors(handler);
