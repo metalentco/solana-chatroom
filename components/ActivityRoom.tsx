@@ -52,7 +52,6 @@ const ActivityRoom = ({ userToken, userId }: ActivityRoomProps) => {
             // @ts-ignore
             arrow
             right
-            feedGroup="timeline"
           />
         </div>
         {/* <StatusUpdateForm feedGroup="timeline" /> */}
