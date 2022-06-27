@@ -5,7 +5,7 @@ import {
   GETSTREAM_OWNER_ID,
 } from "@/libs/constants";
 import type { NextApiRequest, NextApiResponse } from "next";
-import stream from "getstream";
+import { connect } from "getstream";
 import { initFirebase } from "@/libs/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { IUser } from "@/interfaces/User";
@@ -27,7 +27,8 @@ const getUserData = async (uid: string) => {
       id: user.data()?.id,
       userId: user.data()?.userId,
       userName: user.data()?.userName,
-      userToken: user.data()?.userToken,
+      userChatToken: user.data()?.userChatToken,
+      userActivityToken: user.data()?.userActivityToken,
       avatar: user.data()?.avatar,
     };
     return data;
@@ -68,7 +69,7 @@ export default async function handler(
       GETSTREAM_API_KEY &&
       GETSTREAM_API_SECRECT_KEY
     ) {
-      let client = stream.connect(GETSTREAM_API_KEY, GETSTREAM_API_SECRECT_KEY);
+      let client = connect(GETSTREAM_API_KEY, GETSTREAM_API_SECRECT_KEY);
 
       let feed = client.feed("timeline", userId);
       await feed.addActivity({

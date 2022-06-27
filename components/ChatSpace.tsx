@@ -36,7 +36,8 @@ const ChatSpace = ({
     id: "",
     userId: "",
     userName: "",
-    userToken: "",
+    userChatToken: "",
+    userActivityToken: "",
     avatar: "",
   });
   const [isShownProfileModal, setIsShownProfileModal] =
@@ -99,14 +100,16 @@ const ChatSpace = ({
 
     if (response.ok) {
       const data = await response.json();
-      const userToken = data?.userToken;
+      const userChatToken = data?.userChatToken;
+      const userActivityToken = data?.userActivityToken;
 
       const user: IUser = {
         id: account,
         avatar,
         userId,
         userName,
-        userToken,
+        userChatToken,
+        userActivityToken,
       };
       setUser(user);
       await saveUserData(user);
@@ -271,10 +274,10 @@ const ChatSpace = ({
     <div className={styles.container}>
       {active ? (
         !isShownProfileModal &&
-        user.userToken && (
+        user.userChatToken && (
           <div className={styles.chatroomContainer}>
             <ChatRoom
-              userToken={user.userToken}
+              userToken={user.userChatToken}
               userId={user.userId}
               userName={user.userName}
               avatar={user.avatar}

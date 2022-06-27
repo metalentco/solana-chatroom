@@ -20,7 +20,8 @@ const ActivitySpace = ({}: ActivitySpaceProps) => {
     id: "",
     userId: "",
     userName: "",
-    userToken: "",
+    userChatToken: "",
+    userActivityToken: "",
     avatar: "",
   });
   const [isShownProfileModal, setIsShownProfileModal] =
@@ -81,14 +82,16 @@ const ActivitySpace = ({}: ActivitySpaceProps) => {
 
     if (response.ok) {
       const data = await response.json();
-      const userToken = data?.userToken;
+      const userChatToken = data?.userChatToken;
+      const userActivityToken = data?.userActivityToken;
 
       const user: IUser = {
         id: account,
         avatar,
         userId,
         userName,
-        userToken,
+        userChatToken,
+        userActivityToken,
       };
       setUser(user);
       await saveUserData(user);
@@ -133,10 +136,10 @@ const ActivitySpace = ({}: ActivitySpaceProps) => {
     <div className={styles.container}>
       {active ? (
         !isShownProfileModal &&
-        user.userToken && (
+        user.userActivityToken && (
           <div className={styles.chatroomContainer}>
             <ActivityRoom
-              userToken={user.userToken}
+              userToken={user.userActivityToken}
               userId={user.userId}
               userName={user.userName}
               avatar={user.avatar}

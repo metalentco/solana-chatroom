@@ -1,10 +1,16 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { GETSTREAM_API_KEY, GETSTREAM_API_SECRECT_KEY } from "@/libs/constants";
+import {
+  GETSTREAM_API_KEY,
+  GETSTREAM_API_SECRECT_KEY,
+  GETSTREAM_APP_ID,
+} from "@/libs/constants";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { StreamChat } from "stream-chat";
+import { connect } from "getstream";
 
 type Data = {
-  userToken?: string;
+  userChatToken?: string;
+  userActivityToken?: string;
   error?: string;
 };
 
@@ -23,8 +29,16 @@ export default async function handler(
         GETSTREAM_API_KEY,
         GETSTREAM_API_SECRECT_KEY
       );
-      const userToken = serverClient.createToken(userId);
-      return res.status(200).json({ userToken });
+      const userChatToken = serverClient.createToken(userId);
+
+      const client = connect(
+        GETSTREAM_API_KEY,
+        GETSTREAM_API_SECRECT_KEY,
+        GETSTREAM_APP_ID
+      );
+      const userActivityToken = client.createUserToken(userId);
+
+      return res.status(200).json({ userChatToken, userActivityToken });
     } else {
       return res.status(400).json({ error: "Parameters are incorrect." });
     }

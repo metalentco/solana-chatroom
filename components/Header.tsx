@@ -12,6 +12,7 @@ import {
 import { truncateAddress } from "@/libs/utils";
 import styles from "@/styles/Header.module.scss";
 import { StreamChat } from "stream-chat";
+import Link from "next/link";
 
 export enum PAGE_TYPES {
   HOME = "HOME",
@@ -96,6 +97,9 @@ const Header = ({ onRegisterCollection, pageType }: HeaderProps) => {
               &nbsp;)
             </p>
           </div>
+          <Link href="/">
+            <button className={styles.buttonConnect}>Home</button>
+          </Link>
           {pageType == PAGE_TYPES.CHATMESSAGING && (
             <button
               onClick={onRegisterCollection}

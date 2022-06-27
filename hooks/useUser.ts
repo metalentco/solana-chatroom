@@ -17,7 +17,8 @@ export default function useUser() {
         id: user.data()?.id,
         userId: user.data()?.userId,
         userName: user.data()?.userName,
-        userToken: user.data()?.userToken,
+        userChatToken: user.data()?.userChatToken,
+        userActivityToken: user.data()?.userActivityToken,
         avatar: user.data()?.avatar,
       };
       return data;

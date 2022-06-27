@@ -25,6 +25,7 @@ const ActivityRoom = ({
   userName,
   avatar,
 }: ActivityRoomProps) => {
+
   return (
     <StreamApp
       apiKey={GETSTREAM_API_KEY}
@@ -55,33 +56,6 @@ const ActivityRoom = ({
         )}
       />
     </StreamApp>
-    // <StreamApp
-    //   apiKey="dz5f4d5kzrue"
-    //   appId="102254"
-    //   token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoieWVsbG93LWJvbnVzLTUiLCJleHAiOjE2NTYyOTI5MzF9.JOxhm9C1-_MeW6qQf5hEuky7StuPOB1yNVCdydTC01o"
-    // >
-    //   <NotificationDropdown notify />
-    //   <StatusUpdateForm />
-    //   <FlatFeed
-    //     options={{ reactions: { recent: true } }}
-    //     notify
-    //     Activity={(props) => (
-    //       <Activity
-    //         {...props}
-    //         Footer={() => (
-    //           <div style={{ padding: "8px 16px" }}>
-    //             <LikeButton {...props} />
-    //             <CommentField
-    //               activity={props.activity}
-    //               onAddReaction={props.onAddReaction}
-    //             />
-    //             <CommentList activityId={props.activity.id} />
-    //           </div>
-    //         )}
-    //       />
-    //     )}
-    //   />
-    // </StreamApp>
   );
 };
 
