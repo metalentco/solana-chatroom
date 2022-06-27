@@ -61,6 +61,7 @@ export default async function handler(
 
       const userFeed = client.feed("timeline", userId);
       await userFeed.follow("user", "timeline");
+      await userFeed.follow("timeline", "timeline");
 
       return res.status(200).json({ userChatToken, userActivityToken });
     } else {
