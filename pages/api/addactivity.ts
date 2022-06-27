@@ -45,21 +45,27 @@ export default async function handler(
   }
 
   try {
-    const { topic, title, description, url, images, contractAddress, walletAddress } =
-      req.body;
+    const {
+      topic,
+      title,
+      description,
+      url,
+      images,
+      contractAddress,
+      walletAddress,
+    } = req.body;
 
-    let userId = GETSTREAM_OWNER_ID;
+    let userName = walletAddress;
     if (walletAddress) {
       const user = await getUserData(walletAddress);
       if (user) {
-        userId = user.userId;
+        userName = user.userName;
       }
     } else {
       return res.status(400).json({ error: "Parameters are incorrect." });
     }
 
     if (
-      userId &&
       topic &&
       title &&
       description &&
@@ -71,14 +77,14 @@ export default async function handler(
     ) {
       let client = connect(GETSTREAM_API_KEY, GETSTREAM_API_SECRECT_KEY);
 
-      let feed = client.feed("timeline", userId);
+      let feed = client.feed("op3n", "timeline");
       await feed.addActivity({
-        actor: client.user(userId).ref(),
+        actor: client.user("timeline").ref(),
         verb: "tweet",
         object: topic,
         attachments: {
           og: {
-            title,
+            title: `${title} by ${userName}`,
             description,
             url,
             images,

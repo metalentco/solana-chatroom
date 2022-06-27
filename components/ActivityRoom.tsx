@@ -9,53 +9,84 @@ import {
   CommentList,
   CommentField,
   StatusUpdateForm,
+  CommentItem,
 } from "react-activity-feed";
 import "react-activity-feed/dist/index.css";
 
 type ActivityRoomProps = {
   userToken: string;
   userId: string;
-  userName: string;
-  avatar: string;
 };
 
-const ActivityRoom = ({
-  userToken,
-  userId,
-  userName,
-  avatar,
-}: ActivityRoomProps) => {
-
+const ActivityRoom = ({ userToken, userId }: ActivityRoomProps) => {
   return (
-    <StreamApp
-      apiKey={GETSTREAM_API_KEY}
-      appId={GETSTREAM_APP_ID}
-      token={userToken}
+    <div
+      style={{
+        maxWidth: "600px",
+        margin: "0 auto",
+      }}
     >
-      <NotificationDropdown notify />
-      <StatusUpdateForm />
-      <FlatFeed
-        // @ts-ignore
-        options={{ reactions: { recent: true } }}
-        notify
-        Activity={(props) => (
-          <Activity
-            {...props}
-            Footer={() => (
-              <div style={{ padding: "8px 16px" }}>
-                <LikeButton {...props} />
-                <CommentField
-                  activity={props.activity}
-                  // @ts-ignore
-                  onAddReaction={props.onAddReaction}
-                />
-                <CommentList activityId={props.activity.id} />
-              </div>
-            )}
+      <StreamApp
+        apiKey={GETSTREAM_API_KEY}
+        appId={GETSTREAM_APP_ID}
+        token={userToken}
+      >
+        <div
+          style={{
+            background: "#fff",
+            height: 60,
+            borderRadius: 4,
+            margin: "10px 0",
+            padding: "0 20px",
+            boxShadow: "0px 0px 4px rgba(0,0,0,0.15)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexDirection: "row",
+          }}
+        >
+          <h3>Op3n D3mo</h3>
+          <NotificationDropdown
+            // @ts-ignore
+            arrow
+            right
+            feedGroup="op3n"
           />
-        )}
-      />
-    </StreamApp>
+        </div>
+        {/* <StatusUpdateForm feedGroup="op3n" /> */}
+        <FlatFeed
+          feedGroup="op3n"
+          notify
+          Activity={(activityProps) => (
+            <Activity
+              feedGroup="op3n"
+              {...activityProps}
+              Footer={() => (
+                <React.Fragment>
+                  <CommentField
+                    activity={activityProps.activity}
+                    // @ts-ignore
+                    onAddReaction={activityProps.onAddReaction}
+                  />
+                  <CommentList
+                    activityId={activityProps.activity.id}
+                    CommentItem={(props) => (
+                      <React.Fragment>
+                        <CommentItem {...props} />
+                        <LikeButton
+                          reaction={props.comment}
+                          {...activityProps}
+                        />
+                      </React.Fragment>
+                    )}
+                  />
+                </React.Fragment>
+              )}
+            />
+          )}
+        />
+      </StreamApp>
+    </div>
   );
 };
 

@@ -77,7 +77,7 @@ const ActivitySpace = ({}: ActivitySpaceProps) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ userId }),
+      body: JSON.stringify({ userId, userName, avatar }),
     });
 
     if (response.ok) {
@@ -141,8 +141,6 @@ const ActivitySpace = ({}: ActivitySpaceProps) => {
             <ActivityRoom
               userToken={user.userActivityToken}
               userId={user.userId}
-              userName={user.userName}
-              avatar={user.avatar}
             />
           </div>
         )
