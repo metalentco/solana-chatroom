@@ -120,5 +120,4 @@ const allowCors = (fn: any) => async (req: any, res: any) => {
   return await fn(req, res);
 };
 
-module.exports = allowCors(handler);
-// export default allowCors(handler);
+export default allowCors(handler);
