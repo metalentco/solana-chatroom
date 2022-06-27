@@ -95,7 +95,7 @@ const ChatSpace = ({
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ userId }),
+      body: JSON.stringify({ userId, userName, avatar }),
     });
 
     if (response.ok) {
