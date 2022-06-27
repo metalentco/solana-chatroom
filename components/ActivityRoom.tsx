@@ -54,7 +54,7 @@ const ActivityRoom = ({ userToken, userId }: ActivityRoomProps) => {
             right
           />
         </div>
-        <StatusUpdateForm feedGroup="timeline" />
+        {/* <StatusUpdateForm feedGroup="timeline" /> */}
         <FlatFeed
           notify
           feedGroup="timeline"
