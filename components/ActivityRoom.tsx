@@ -52,6 +52,7 @@ const ActivityRoom = ({ userToken, userId }: ActivityRoomProps) => {
             // @ts-ignore
             arrow
             right
+            feedGroup="timeline"
           />
         </div>
         {/* <StatusUpdateForm feedGroup="timeline" /> */}
@@ -72,8 +73,9 @@ const ActivityRoom = ({ userToken, userId }: ActivityRoomProps) => {
                     activityId={activityProps.activity.id}
                     CommentItem={(props) => (
                       <React.Fragment>
-                        <CommentItem {...props} />
+                        <CommentItem {...props} style={{marginLeft: 10, marginRight: 10}} />
                         <LikeButton
+                          style={{padding: "0 10px 10px 10px", marginLeft: 10, marginRight: 10}}
                           reaction={props.comment}
                           {...activityProps}
                         />
