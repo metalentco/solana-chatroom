@@ -86,6 +86,7 @@ export default async function handler(
         },
       });
 
+      res.setHeader("Access-Control-Allow-Origin", "*");
       return res.status(200).json({ message: "Success" });
     } else {
       return res.status(400).json({ error: "Parameters are incorrect." });
