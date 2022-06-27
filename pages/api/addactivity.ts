@@ -105,7 +105,7 @@ export default async function handler(
 }
 
 const allowCors = (fn: any) => async (req: any, res: any) => {
-  res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader("Access-Control-Allow-Credentials", false);
   res.setHeader("Access-Control-Allow-Origin", "*");
   // another common pattern
   // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
