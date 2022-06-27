@@ -74,7 +74,7 @@ export default async function handler(
       let feed = client.feed("timeline", userId);
       await feed.addActivity({
         actor: client.user(userId).ref(),
-        verb: "post",
+        verb: "tweet",
         object: topic,
         attachments: {
           og: {
