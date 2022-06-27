@@ -36,10 +36,7 @@ const getUserData = async (uid: string) => {
   return null;
 };
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
+async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   if (req.method != "POST") {
     return res.status(400).json({ error: "It should be POST method." });
   }
@@ -107,8 +104,7 @@ export default async function handler(
 const allowCors = (fn: any) => async (req: any, res: any) => {
   res.setHeader("Access-Control-Allow-Credentials", false);
   res.setHeader("Access-Control-Allow-Origin", "*");
-  // another common pattern
-  // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+  res.setHeader("Access-Control-Allow-Origin", req.headers.origin);
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET,OPTIONS,PATCH,DELETE,POST,PUT"
@@ -125,3 +121,4 @@ const allowCors = (fn: any) => async (req: any, res: any) => {
 };
 
 module.exports = allowCors(handler);
+// export default allowCors(handler);
