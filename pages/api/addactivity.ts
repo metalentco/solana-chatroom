@@ -77,7 +77,7 @@ export default async function handler(
     ) {
       let client = connect(GETSTREAM_API_KEY, GETSTREAM_API_SECRECT_KEY);
 
-      let feed = client.feed("op3n", "timeline");
+      let feed = client.feed("timeline", "timeline");
       await feed.addActivity({
         actor: client.user("timeline").ref(),
         verb: "tweet",

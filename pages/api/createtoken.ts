@@ -47,20 +47,20 @@ export default async function handler(
       client.createUserToken("timeline");
       const userActivityToken = client.createUserToken(userId);
 
-      client.user("timeline").getOrCreate({
+      await client.user("timeline").getOrCreate({
         name: "Announcement",
         occupation: "Op3n Announcer",
         image: "/images/announcer.png",
       });
 
-      client.user(userId).getOrCreate({
+      await client.user(userId).getOrCreate({
         name: userName,
         occupation: "Async Playground Player",
         image: avatar,
       });
 
-      const userFeed = client.feed("op3n", userId);
-      userFeed.follow("op3n", "timeline");
+      const userFeed = client.feed("timeline", userId);
+      await userFeed.follow("user", "timeline");
 
       return res.status(200).json({ userChatToken, userActivityToken });
     } else {

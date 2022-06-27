@@ -30,6 +30,8 @@ const ActivityRoom = ({ userToken, userId }: ActivityRoomProps) => {
         apiKey={GETSTREAM_API_KEY}
         appId={GETSTREAM_APP_ID}
         token={userToken}
+        // @ts-ignore
+        userId={userId}
       >
         <div
           style={{
@@ -50,16 +52,14 @@ const ActivityRoom = ({ userToken, userId }: ActivityRoomProps) => {
             // @ts-ignore
             arrow
             right
-            feedGroup="op3n"
           />
         </div>
-        {/* <StatusUpdateForm feedGroup="op3n" /> */}
+        <StatusUpdateForm feedGroup="timeline" />
         <FlatFeed
-          feedGroup="op3n"
           notify
+          feedGroup="timeline"
           Activity={(activityProps) => (
             <Activity
-              feedGroup="op3n"
               {...activityProps}
               Footer={() => (
                 <React.Fragment>
