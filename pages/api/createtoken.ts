@@ -60,7 +60,7 @@ export default async function handler(
       });
 
       const userFeed = client.feed("op3n", userId);
-      userFeed.follow("user", "timeline");
+      userFeed.follow("op3n", "timeline");
 
       return res.status(200).json({ userChatToken, userActivityToken });
     } else {
