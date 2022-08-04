@@ -120,7 +120,7 @@ Right after registering channel, you can see your channel if you hold the specif
 
 If not, you can't see any channels.
 
-**Devis** already created two channels according to ERC721A and ERC1155 contracts he made for `AsyncPlayground`.
+I  created two channels according to ERC721A and ERC1155 contracts he made for `AsyncPlayground`.
 
 You can purchase the NFT in [Playground](https://asyncplayground.vercel.app/).
 
